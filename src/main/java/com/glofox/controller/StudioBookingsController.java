@@ -123,8 +123,8 @@ public class StudioBookingsController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "{bookingId}/Bookings")
-	public void findBookingsbyId( @PathVariable int bookingId){
-		studioBookingService.findBookingbyId(bookingId);
+	public StudioBooking findBookingsbyId( @PathVariable int bookingId){
+		return studioBookingService.findBookingbyId(bookingId);
 	}
 
 }
