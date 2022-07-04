@@ -50,12 +50,11 @@ public class StudioClassesController {
 	}
 	
 	@RequestMapping(method = RequestMethod.DELETE, value = "{classId}/Classes")
-	public void deleteBookings( @PathVariable int classId){
+	public void deleteClassById( @PathVariable int classId){
 		classService.deleteClassbyId(classId);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, value = "{classService}/Classes")
-	public void findBookingsbyId( @PathVariable String className){
-		classService.findClassbyName(className);
-	}
+	@RequestMapping(method = RequestMethod.GET, value = "ClassName/{className}/Classes")
+	public StudioClass findClassbyName( @PathVariable String className){
+		return classService.findClassbyName(className);
 }
