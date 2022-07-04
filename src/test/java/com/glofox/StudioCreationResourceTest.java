@@ -1,6 +1,7 @@
 package com.glofox;
 
 import static org.hamcrest.CoreMatchers.containsString;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -212,7 +213,7 @@ public class StudioCreationResourceTest {
     }
 	
 	@Test
-    public void givenBookingsCreatedCallWithwrongClass_thenResourceNotFound() throws Exception {
+    public void givenBookingsCreatedCallWithwrongClass__whenpostBooking_thenResourceNotFound() throws Exception {
         //given
 		Studio studio = createStudiowithClassesAndBookings();
 		this.mockMvc.perform(post("/Studio").contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(studio)));
@@ -226,7 +227,7 @@ public class StudioCreationResourceTest {
     }
 	
 	@Test
-    public void givenBookingsWithInavlidDate_thenBadRequest() throws Exception {
+    public void givenBookingsWithInavlidDate__whenpostBooking_thenBadRequest() throws Exception {
         //given
 		Studio studio = createStudiowithClasses();
 		this.mockMvc.perform(post("/Studio").contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(studio)));
@@ -244,7 +245,7 @@ public class StudioCreationResourceTest {
     }
 	
 	@Test
-    public void givenBookingsCreatedWithStudiAndClasses_then200Success() throws Exception {
+    public void givenBookingsCreatedWithStudiAndClasses_whenSearchforBookings_then200Success() throws Exception {
         //given
 		Studio studio = createStudiowithClasses();
 		this.mockMvc.perform(post("/Studio").contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(studio)));
@@ -292,7 +293,7 @@ public class StudioCreationResourceTest {
     }
 	
 	@Test
-    public void givenBookingsCreatedWithoutRequestHeaderETag_thenInvalidRequest() throws Exception {
+    public void givenBookingsCreated_whenWithoutRequestHeaderETag_thenInvalidRequest() throws Exception {
         //given
 		Studio studio = createStudiowithClasses();
 		this.mockMvc.perform(post("/Studio").contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(studio)));
@@ -310,7 +311,7 @@ public class StudioCreationResourceTest {
     }
 	
 	@Test
-    public void givenClassWithBookings_then200Success() throws Exception {
+    public void givenClassWithBookings_whenSearchClasses_then200Success() throws Exception {
         //given
 		Studio studio = createStudio();
 		this.mockMvc.perform(post("/Studio").contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(studio)));
@@ -327,6 +328,22 @@ public class StudioCreationResourceTest {
         cleanup();
     }
 	
+	
+	@Test
+    public void givenClassWithBookings_WhenFindClassByName_then200Success() throws Exception {
+        //given
+		Studio studio = createStudio();
+		this.mockMvc.perform(post("/Studio").contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(studio)));
+		
+		List<StudioClass> studioclasses = createClassesWithBookings();
+		this.mockMvc.perform(post("/GlofoxStudio/Classes").contentType(MediaType.APPLICATION_JSON).content(JsonUtils.toJson(studioclasses.get(0))));
+		
+		this.mockMvc.perform(get("/ClassName/Aerobics/Classes")).andDo(print()).andExpect(status().isOk())
+         .andExpect(content().string(containsString("Aerobics")));
+		
+        
+        cleanup();
+    }
 	
 	private Studio createStudiowithClassesAndBookings() {
 		 Studio studio = createStudio();
