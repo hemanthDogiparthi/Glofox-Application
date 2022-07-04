@@ -1,0 +1,15 @@
+version: '1'
+services:
+    studio-application:
+        container_name: studio-application
+        build:
+            context: ../Glofox-Application
+            dockerfile: Dockerfile
+        image: studio-application:latest
+        ports:
+            - 8887:5000
+        networks:
+            - spring-cloud-network
+networks:
+    spring-cloud-network:
+        driver: bridge
