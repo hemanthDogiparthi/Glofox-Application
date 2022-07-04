@@ -124,6 +124,7 @@ https://github.com/hemanthDogiparthi/Glofox-Application
      * Swagger UI for showing the APIs provided
      * A runtime in memory H2 Database
      * Centralised and Unifrom Error Response Mechanism
+     * Complete Validations for Bookings Creation with Date checks
      
     
 
