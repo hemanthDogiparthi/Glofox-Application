@@ -96,15 +96,23 @@
  
  #Three ways to Access the Application
  
- 	1. In the Project Folder 
+ 	* In the Project Folder 
  	   mvn spring-boot:run
  	   Accesss the Apis on http://localhost:5000/
- 	2. Run the Project as Docker Container using
- 	   docker-compose up --build  (This will build a impage on Java Alpine and Containerise it)
+ 	   
+ 	* Run the Project as Docker Container using
+ 	   docker-compose up --build  (This will build a image on Java Alpine 8 and Containerise it)
  	   Accesss the Apis on http://localhost:8887/
- 	3. Access the Service from AWS URL
+ 	   
+ 	* Access the Service from AWS URL
  	   http://studioapplication-env.eba-2qvvr5ad.eu-west-1.elasticbeanstalk.com/swagger-ui/index.html
  	   The Applcation is deployed to AWS on Elastic Bean Stalk.
+ 	   
+# GitHubLink
+
+https://github.com/hemanthDogiparthi/Glofox-Application
+
+
         
 # Key Features:
      * Containarized the Application with Docker. Further improvements and Automation 
@@ -112,10 +120,11 @@
      * Tried to Address the concurrent access for Bookings. 
        A practical business scenario is concurrent usage of the Bookings service specifically
      * A data Model where a class cannot exist without a Studio and a Booking cannot exist to its class and a studio can exist independently.
-     * Test Coverage with Jacaco. 
+     * Test Coverage with Jacaco. A basic UML diagram is added for reference.
      * Swagger UI for showing the APIs provided
      * A runtime in memory H2 Database
      * Centralised and Unifrom Error Response Mechanism
+     
     
 
 # Scope for Improvements:
@@ -124,7 +133,7 @@
     * Seperate Objects for Model and Entity.  Use DTO pattern to create seperate Model Objects. SO that Entity will not be 
       shown to external users.
     * Integrate the Application with Front End UI to make the app interactive
-    * Test Code Coverage percentage for the Application is 82% . 
+    * Test Code Coverage percentage for the Application is Around 75-80% . 
       Further tests can be included 
     * Add Authentication for restapis. Add seperate authorization for Studio Owner API's (Studio and Class)
       and seperate for Bookings API (Typically APi used by the customer)
